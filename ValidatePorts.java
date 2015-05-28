@@ -9,7 +9,7 @@ public class ValidatePorts {
 
 
 
-
+    //ѕолучаем массив строк пользовательского ввода, возвращаем валидный лист с номерами портов
     static ArrayList<Integer> isValidPorts(String[] inPorts) {
 
         for (int i = 0; i < inPorts.length ; i++) {

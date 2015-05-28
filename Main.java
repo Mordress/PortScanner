@@ -16,7 +16,7 @@ public class Main {
             String input = scanner.nextLine();
 
             if (!ValidateIPV4.isValidIPV4(input)) {
-                System.out.println("Wrong ip! Try again.");
+                System.err.println("Wrong ip! Try again.");
             }
             else{
                 ip = input;
