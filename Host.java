@@ -5,13 +5,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-/**
- * Created by Mordress on 28.05.2015.
- */
 public class Host {
     private String ip = "0.0.0.0";
     private int port;
-    private final int timeout = 1000;
+    private final int TIMEOUT = 1000;
 
     public Host(String ip, int port) {
         this.ip = ip;
@@ -24,7 +21,7 @@ public class Host {
         try {
             Socket socket = new Socket();
             SocketAddress socketAddress = new InetSocketAddress(this.ip, this.port);
-            socket.connect(socketAddress, this.timeout);
+            socket.connect(socketAddress, this.TIMEOUT);
             socket.close();
             return true;
         } catch (IOException e) {

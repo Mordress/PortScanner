@@ -26,15 +26,8 @@ public class Main {
         System.out.println("\nEnter host's ports(using whitespace for split): ");
         String input = scanner.nextLine();
         String[] inputPorts = input.split("\\s");
-        ports = new ArrayList<Integer>();
-        for (String i : inputPorts) {
-            try {
-                ports.add(Integer.parseInt(i));
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Wrong port number(s)");
-            }
-        }
+
+        ports = ValidatePorts.isValidPorts(inputPorts);
 
         for (int prt : ports) {
             Host host = new Host(ip, prt);
