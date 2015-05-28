@@ -1,75 +1,51 @@
 package com.mordress;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    private static String IP = "127.0.0.1";
-    private static String[] ports;
-    private static final int timeout = 1000;
-    static boolean exit = false;
-
-    public static String getIP() {
-        return IP;
-    }
-
-
-    public static void setIP(String Ip) {
-        Main.IP = Ip;
-    }
+    static String ip;
+    static ArrayList<Integer> ports;
 
     public static void main(String[] args) {
+        System.out.print("Enter host's IP: ");
         Scanner scanner = new Scanner(System.in);
-        while (!exit) {
 
-            System.out.print("Enter host's IP: ");
+        while (true) {
+            String input = scanner.nextLine();
 
-            setIP(scanner.nextLine());
-
-            System.out.print("\nEnter host's ports: ");
-
-            String inPorts = scanner.nextLine();
-            ports = inPorts.split("\\s");
-
-            for (int i = 0; i < ports.length; i++) {
-                if (isOpen(IP, Integer.parseInt(ports[i]), timeout)) {
-                    System.out.println("port " + ports[i] + " \tis opened");
-                } else {
-                    System.out.println("port " + ports[i] + " \tis closed");
-                }
+            if (!ValidateIPV4.isValidIPV4(input)) {
+                System.out.println("Wrong ip! Try again.");
             }
-            System.out.println("For exit type \"exit\", for rerun type - \"rerun\"");
-            String choice = scanner.nextLine();
-            switch (choice) {
-                case "exit": exit = true; break;
-                case "rerun": exit = false; break;
-                default:
-                    System.out.println("Wrong input. Try again.");
-
-            }
-
-
-
+            else{
+                ip = input;
+                break;}
         }
 
+        System.out.println("\nEnter host's ports(using whitespace for split): ");
+        String input = scanner.nextLine();
+        String[] inputPorts = input.split("\\s");
+        ports = new ArrayList<Integer>();
+        for (String i : inputPorts) {
+            try {
+                ports.add(Integer.parseInt(i));
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Wrong port number(s)");
+            }
+        }
 
-
-
-
-    }
-
-    public static boolean isOpen(String host, int port, int timeout) {
-        try {
-            Socket socket = new Socket();
-            SocketAddress socketAddress = new InetSocketAddress(host, port);
-            socket.connect(socketAddress, timeout);
-            socket.close();
-            return true;
-        } catch (IOException e) {
-            return false;
+        for (int prt : ports) {
+            Host host = new Host(ip, prt);
+            if (host.isOpen()) {
+                System.out.println(host + " \tis opened");
+            }
+            else {
+                System.out.println(host + " \tis closed");
+            }
         }
     }
+
+
 }
