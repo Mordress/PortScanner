@@ -38,6 +38,7 @@ public class Main {
                 System.out.println(host + " \tis closed");
             }
         }
+        scanner.close();
     }
 
 
