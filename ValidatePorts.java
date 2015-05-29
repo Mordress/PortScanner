@@ -4,13 +4,15 @@ package com.mordress;
 import java.util.ArrayList;
 
 public class ValidatePorts {
-    static ArrayList<Integer> portList = new ArrayList<>();
-    static ArrayList<Integer> ValidPortList = new ArrayList<>();
+    static ArrayList<Integer> portList;
+    static ArrayList<Integer> ValidPortList;
 
 
 
     //Принимаем массив строк пользовательского ввода, возвращаем валидный список портов
     static ArrayList<Integer> isValidPorts(String[] inPorts) {
+        portList = new ArrayList<Integer>();
+        ValidPortList = new ArrayList<Integer>();
 
         for (int i = 0; i < inPorts.length ; i++) {
             try {
