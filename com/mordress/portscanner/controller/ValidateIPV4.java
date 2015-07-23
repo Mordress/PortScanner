@@ -1,4 +1,4 @@
-package com.mordress;
+package com.mordress.portscanner.controller;
 
 import java.util.regex.Pattern;
 

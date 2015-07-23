@@ -1,4 +1,4 @@
-package com.mordress;
+package com.mordress.portscanner.model;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -16,8 +16,7 @@ public class Host {
     }
 
 
-
-    boolean isOpen() {
+    public boolean isOpen() {
         try {
             Socket socket = new Socket();
             SocketAddress socketAddress = new InetSocketAddress(this.ip, this.port);

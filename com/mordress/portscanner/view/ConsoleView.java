@@ -1,10 +1,14 @@
-package com.mordress;
+package com.mordress.portscanner.view;
 
+
+import com.mordress.portscanner.controller.ValidateIPV4;
+import com.mordress.portscanner.controller.ValidatePorts;
+import com.mordress.portscanner.model.Host;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class ConsoleView {
     static String ip;
     static ArrayList<Integer> ports;
     static boolean exit = false;
@@ -16,6 +20,7 @@ public class Main {
 
             while (true) {
                 String input = scanner.nextLine();
+                ports = new ArrayList<>();
 
                 if (!ValidateIPV4.isValidIPV4(input)) {
                     System.err.println("Wrong ip! Try again.");
@@ -25,21 +30,29 @@ public class Main {
                 }
             }
 
-            System.out.println("\nEnter host's ports(using whitespace for split): ");
+            System.out.println("Enter host's ports 1-65535 (using whitespace for split): ");
             String input = scanner.nextLine();
             String[] inputPorts = input.split("\\s");
 
-            ports = ValidatePorts.isValidPorts(inputPorts);
 
-            for (int prt : ports) {
-                Host host = new Host(ip, prt);
-                if (host.isOpen()) {
-                    System.out.println(host + " \tis opened");
+            for (String iter : inputPorts) {
+                if (ValidatePorts.isValidPort(iter)) {
+                    ports.add(Integer.parseInt(iter));
                 } else {
-                    System.out.println(host + " \tis closed");
+                    System.out.println(iter + "\tis not valid port number");
                 }
             }
 
+            if (ports != null) {
+                for (int prt : ports) {
+                    Host host = new Host(ip, prt);
+                    if (host.isOpen()) {
+                        System.out.println(host + " \tis opened");
+                    } else {
+                        System.out.println(host + " \tis closed");
+                    }
+                }
+            }
             System.out.println("\'rerun\' - for rerung programm, \'exit\' for exit");
             String userchoice = scanner.nextLine();
 
