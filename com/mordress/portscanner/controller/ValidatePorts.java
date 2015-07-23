@@ -3,7 +3,7 @@ package com.mordress.portscanner.controller;
 
 public class ValidatePorts {
 
-    //Принимаем массив строк пользовательского ввода, возвращаем валидный список портов
+
     public static boolean isValidPort(String inPorts) {
         int prt;
         try {
