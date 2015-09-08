@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleView {
+
     static String ip;
+
     static ArrayList<Integer> ports;
+
     static boolean exit = false;
 
     public static void main(String[] args) {
@@ -70,6 +73,5 @@ public class ConsoleView {
             }
         }
     }
-
 
 }

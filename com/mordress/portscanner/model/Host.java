@@ -6,15 +6,17 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 public class Host {
+
     private String ip = "0.0.0.0";
+
     private int port;
+
     private final int TIMEOUT = 1000;
 
     public Host(String ip, int port) {
         this.ip = ip;
         this.port = port;
     }
-
 
     public boolean isOpen() {
         try {
@@ -32,4 +34,5 @@ public class Host {
     public String toString() {
         return ip + ":" + port + " ";
     }
+
 }
